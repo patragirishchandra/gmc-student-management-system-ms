@@ -1,0 +1,26 @@
+server:
+  port: 8082
+
+spring:
+  main:
+    allow-circular-reference: true
+
+  application:
+    name: studentManagementSystem
+  datasource:
+    hikari:
+      minimumIdle: 2
+      maximumPoolSize: 10
+      idleTimeout: 30000
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/gmc
+    username: postgres
+    password: postgres
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format-sql: true
+      show-sql: true

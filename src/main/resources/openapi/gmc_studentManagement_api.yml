@@ -1,0 +1,309 @@
+openapi: 3.0.3
+info:
+  title: GMC Student Management API
+  description: GMC Student Management APIs
+  version: 1.0.11
+  contact:
+    name: API support
+    email: patragirishchandra@gmail.com
+servers:
+  - url: https://localhost:8080/gmc/v1
+tags:
+  - name: Student Managemet- APIs
+    description: This will provide the API to register a student details with mark
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+
+paths:
+  /studentmanagemet/students:
+    post:
+      tags:
+        - Student Management- APIs
+      summary: Create student and result info
+      description: Create student and result info
+
+      security: []
+      operationId: registerStudents
+      parameters:
+        - name: xt-trace-id
+          in: header
+          description: "Represents request traceId, which is an UUID. Must follow the pattern: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'"
+          required: true
+          schema:
+            type: string
+            pattern: '^([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12})$'
+      requestBody:
+        description: Create student and result info
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentRegistrationInput'
+        required: true
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentRegistrationOut'
+
+        400:
+          $ref: '#/components/responses/400-bad-request'
+
+        500:
+          $ref: '#/components/responses/500-internal-server-error'
+
+        503:
+          $ref: '#/components/responses/503-Service-unavailable'
+
+  /studentmanagemet/student/{student-id}:
+    patch:
+      tags:
+        - Student Management- APIs
+      summary: Update an existing student
+      description: Update an existing student
+
+      security: []
+      operationId: reviseResult
+      parameters:
+        - name: xt-trace-id
+          in: header
+          description: "Represents request traceId, which is an UUID. Must follow the pattern: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'"
+          required: true
+          schema:
+            type: string
+            pattern: '^([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12})$'
+        - name: student-id
+          in: path
+          description: student-id
+          required: true
+          schema:
+            type: string
+            pattern: '^([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12})$'
+            example: '95d59e03-ccdf-4aaa-89ad-eab30f7cd84d'
+
+      requestBody:
+        description: Update an existent pet in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResultReviseInput'
+        required: true
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentRegistrationData'
+
+        400:
+          $ref: '#/components/responses/400-bad-request'
+          description: Invalid ID supplied
+        500:
+          $ref: '#/components/responses/500-internal-server-error'
+
+        503:
+          $ref: '#/components/responses/503-Service-unavailable'
+
+
+components:
+  schemas:
+
+    EmptyDataResponse:
+      description: EmptyDataResponse
+      type: object
+      properties:
+        data:
+          type: string
+          example: null
+        notifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/Notification'
+
+    Notification:
+      type: object
+      properties:
+        code:
+          type: string
+          example: 'Error code'
+        message:
+          type: string
+          example: 'error message'
+        severity:
+          type: string
+          example: 'INFO'
+        metadata:
+          type: object
+          description: 'context specific to this area. May not be provided.'
+        uuid:
+          type: string
+          example: 'abcf-345556-jajc-23sdds'
+          description: 'tracking id'
+        timestamp:
+          type: object
+          example: '2021-10-12T20:38:45.408Z'
+          description: 'Timestamp of the notification'
+    ResultReviseInput:
+      type: object
+      properties:
+        marks1:
+          type: integer
+          minimum: 0
+          maximum: 100
+          example: 35
+        marks2:
+          type: integer
+          minimum: 0
+          maximum: 100
+          example: 35
+        marks3:
+          type: integer
+          minimum: 0
+          maximum: 100
+          example: 35
+
+    StudentRegistrationInput:
+      type: object
+      properties:
+        students:
+          type: array
+          items:
+            $ref: '#/components/schemas/StudentData'
+
+    StudentData:
+      type: object
+      properties:
+        firstName:
+          type: string
+          minLength: 3
+          example: "Girish"
+        lstName:
+          type: string
+          minLength: 3
+          example: "Patra"
+        dob:
+          type: string
+          description: "yyyy-MM-dd"
+          example: "2023-08-18"
+        section:
+          type: string
+          enum: [A, B, C]
+        gender:
+          type: string
+          enum: [M, F, O]
+        marks1:
+          type: integer
+          minimum: 0
+          maximum: 100
+          example: 35
+        marks2:
+          type: integer
+          minimum: 0
+          maximum: 100
+        marks3:
+          type: integer
+          minimum: 0
+          maximum: 100
+
+
+    StudentRegistrationOut:
+      type: array
+      items:
+        $ref: '#/components/schemas/StudentRegistrationData'
+
+    StudentRegistrationData:
+      type: object
+      properties:
+        studentId:
+          type: string
+          example: "fad7c05d-656d-4328-bc69-c3eb3ac66930"
+        name:
+          type: string
+          example: "Girish Patra"
+        totalMark:
+          type: integer
+          example: 200
+        average:
+          type: number
+          example: 30
+        result:
+          type: string
+          example: "Pass"
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  responses:
+    400-bad-request:
+      description: Bad Request - Validation Errors
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EmptyDataResponse'
+    401-unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EmptyDataResponse'
+    403-forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EmptyDataResponse'
+    404-not-found:
+      description: Resources Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EmptyDataResponse'
+    405-not-allowed:
+      description: Method Not Allowed. The client tried to access the resource with a method that is not supported.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EmptyDataResponse'
+    406-not-acceptable:
+      description: Not Acceptable. The request contained an accept header that requested a content-type other than application/json and a character set other than UTF-8.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EmptyDataResponse'
+    408-request-timeout:
+      description: Request timeout
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EmptyDataResponse'
+    422-unprocessable-entity:
+      description: Unprocessable Entity - Resource fails business validation and requires external interaction from Api/process to be completed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EmptyDataResponse'
+    429-too-many-requests:
+      description: Too many requests - Blocked due to rate limiting.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EmptyDataResponse'
+    500-internal-server-error:
+      description: Internal Server Error. Something went wrong in the API. The operation failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EmptyDataResponse'
+    503-Service-unavailable:
+      description: Service Unavailable - The server cannot handle the request for a service due to temporary maintenance.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EmptyDataResponse'
+
+security:
+  - bearerAuth: []

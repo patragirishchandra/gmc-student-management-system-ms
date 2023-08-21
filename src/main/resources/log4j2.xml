@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <Console name="LogToConsole" target="SYSTEM_OUT">
+            <PatternLayout
+              pattern="[%X{xRequestId}] %d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %enc{%msg}%n"/>
+        </Console>
+        <RollingFile
+          name="rollingFile"
+          fileName="${sys:catalina.home}/logs/lvvr-orchestrator.log"
+          filePattern="${sys:catalina.home}/logs/lvvr-orchestrator.%i.log"
+          ignoreExceptions="false">
+            <PatternLayout>
+                <Pattern>[%X{xRequestId}] %d{yyyy-MM-dd HH:mm:ss} %-5p %enc{%m}%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="20MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="LogToConsole"/>
+            <AppenderRef ref="rollingFile"/>
+        </Root>
+    </Loggers>
+</Configuration>

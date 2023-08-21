@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "f16f477e-a987-424e-bc55-e49ce4b60351",
+		"name": "Student management System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15568346"
+	},
+	"item": [
+		{
+			"name": "registerStudents",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "xt-trace-id",
+						"value": "10239f2c-638a-4cf6-b381-68ea88f7d55e",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"students\": [\r\n        {\r\n            \"firstName\": \"Girish\",\r\n            \"lstName\": \"Patra\",\r\n            \"dob\": \"2005-08-18\",\r\n            \"section\": \"A\",\r\n            \"gender\": \"M\",\r\n            \"marks1\": 36,\r\n            \"marks2\": 37,\r\n            \"marks3\": 58\r\n        }\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/gmc/v1/studentmanagemet/students",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"gmc",
+						"v1",
+						"studentmanagemet",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reviseResult",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "xt-trace-id",
+						"value": "10239f2c-638a-4cf6-b381-68ea88f7d55e",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"marks1\": 35,\r\n  \"marks2\": 35,\r\n  \"marks3\": 35\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/gmc/v1/studentmanagemet/student/303b6b42-016c-421e-8c4f-7c71dde6059b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"gmc",
+						"v1",
+						"studentmanagemet",
+						"student",
+						"303b6b42-016c-421e-8c4f-7c71dde6059b"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

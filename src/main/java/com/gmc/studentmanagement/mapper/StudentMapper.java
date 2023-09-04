@@ -55,9 +55,9 @@ public class StudentMapper {
       studentEntity.setDob(dob);
       studentEntity.setSection(studentData.getSection().getValue());
       studentEntity.setGender(studentData.getGender().getValue());
-      studentEntity.setMarks1(Long.valueOf(studentData.getMarks1()));
-      studentEntity.setMarks2(Long.valueOf(studentData.getMarks2()));
-      studentEntity.setMarks3(Long.valueOf(studentData.getMarks3()));
+      studentEntity.setCoreJava(Long.valueOf(studentData.getCoreJava()));
+      studentEntity.setSpring(Long.valueOf(studentData.getSpring()));
+      studentEntity.setCloudTechnology(Long.valueOf(studentData.getCloudTechnology()));
 
       studentEntity.setTotalMark(calculateTotalMark(studentEntity));
       studentEntity.setAverage(calculateAverageMark(studentEntity));
@@ -103,7 +103,7 @@ public class StudentMapper {
     LOGGER.info(
         "Calculating total mark for studentId: [{}] and student name: [{}]",
         studentEntity.getStudentId(), studentEntity.getFirstName());
-    return studentEntity.getMarks1() + studentEntity.getMarks2() + studentEntity.getMarks3();
+    return studentEntity.getCoreJava() + studentEntity.getSpring() + studentEntity.getCloudTechnology();
   }
 
   /**
@@ -132,9 +132,9 @@ public class StudentMapper {
         "Calculating result for studentId: [{}] and student name: [{}]",
         studentEntity.getStudentId(), studentEntity.getFirstName());
     String result = null;
-    if (studentEntity.getMarks1() >= THIRTY_FIVE
-        && studentEntity.getMarks2() >= THIRTY_FIVE
-        && studentEntity.getMarks3() >= THIRTY_FIVE) {
+    if (studentEntity.getCoreJava() >= THIRTY_FIVE
+        && studentEntity.getSpring() >= THIRTY_FIVE
+        && studentEntity.getCloudTechnology() >= THIRTY_FIVE) {
 
       result = PASS.name();
     } else {
@@ -181,9 +181,9 @@ public class StudentMapper {
     LOGGER.info("Result revise started for student name: [{}] and studentId: [{}]",
         studentEntity.getFirstName(), studentEntity.getStudentId());
 
-    studentEntity.setMarks1(Long.valueOf(resultReviseInput.getMarks1()));
-    studentEntity.setMarks2(Long.valueOf(resultReviseInput.getMarks2()));
-    studentEntity.setMarks3(Long.valueOf(resultReviseInput.getMarks3()));
+    studentEntity.setCoreJava(Long.valueOf(resultReviseInput.getCoreJava()));
+    studentEntity.setSpring(Long.valueOf(resultReviseInput.getSpring()));
+    studentEntity.setCloudTechnology(Long.valueOf(resultReviseInput.getCloudTechnology()));
 
     studentEntity.setTotalMark(calculateTotalMark(studentEntity));
     studentEntity.setAverage(calculateAverageMark(studentEntity));

@@ -25,7 +25,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"students\": [\r\n        {\r\n            \"firstName\": \"Girish\",\r\n            \"lstName\": \"Patra\",\r\n            \"dob\": \"2005-08-18\",\r\n            \"section\": \"A\",\r\n            \"gender\": \"M\",\r\n            \"marks1\": 36,\r\n            \"marks2\": 37,\r\n            \"marks3\": 58\r\n        }\r\n    ]\r\n}"
+					"raw": "{\r\n    \"students\": [\r\n        {\r\n            \"firstName\": \"Girish\",\r\n            \"lstName\": \"Patra\",\r\n            \"dob\": \"2005-08-18\",\r\n            \"section\": \"A\",\r\n            \"gender\": \"M\",\r\n            \"coreJava\": 36,\r\n            \"spring\": 37,\r\n            \"cloudTechnology\": 58\r\n        }\r\n    ]\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8082/gmc/v1/studentmanagemet/students",
@@ -63,7 +63,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"marks1\": 35,\r\n  \"marks2\": 35,\r\n  \"marks3\": 35\r\n}"
+					"raw": "{\r\n  \"coreJava\": 35,\r\n  \"spring\": 35,\r\n  \"cloudTechnology\": 35\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8082/gmc/v1/studentmanagemet/student/303b6b42-016c-421e-8c4f-7c71dde6059b",

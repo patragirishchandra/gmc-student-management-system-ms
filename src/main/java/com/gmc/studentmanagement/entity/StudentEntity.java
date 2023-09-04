@@ -41,16 +41,16 @@ public class StudentEntity {
   private String gender;
 
   // Marks for subject 1
-  @Column(name = "marks1")
-  private Long marks1;
+  @Column(name = "core_java")
+  private Long coreJava;
 
   // Marks for subject 2
-  @Column(name = "marks2")
-  private Long marks2;
+  @Column(name = "spring")
+  private Long spring;
 
   // Marks for subject 3
-  @Column(name = "marks3")
-  private Long marks3;
+  @Column(name = "cloud_tech")
+  private Long cloudTechnology;
 
   // Total marks obtained by the student
   @Column(name = "total_mrk")
@@ -77,15 +77,15 @@ public class StudentEntity {
    * @param dob       Date of Birth of the student
    * @param section   Section in which the student belongs
    * @param gender    Gender of the student
-   * @param marks1    Marks for subject 1
-   * @param marks2    Marks for subject 2
-   * @param marks3    Marks for subject 3
+   * @param coreJava    Marks for subject 1
+   * @param spring    Marks for subject 2
+   * @param cloudTechnology    Marks for subject 3
    * @param totalMark Total marks obtained by the student
    * @param average   Average marks of the student
    * @param result    Result of the student (Pass/Fail)
    */
   public StudentEntity(String studentId, String firstName, String lastName, LocalDate dob,
-      String section, String gender, Long marks1, Long marks2, Long marks3, Long totalMark,
+      String section, String gender, Long coreJava, Long spring, Long cloudTechnology, Long totalMark,
       Long average, String result) {
     this.studentId = studentId;
     this.firstName = firstName;
@@ -93,9 +93,9 @@ public class StudentEntity {
     this.dob = dob;
     this.section = section;
     this.gender = gender;
-    this.marks1 = marks1;
-    this.marks2 = marks2;
-    this.marks3 = marks3;
+    this.coreJava = coreJava;
+    this.spring = spring;
+    this.cloudTechnology = cloudTechnology;
     this.totalMark = totalMark;
     this.average = average;
     this.result = result;
@@ -149,28 +149,28 @@ public class StudentEntity {
     this.gender = gender;
   }
 
-  public Long getMarks1() {
-    return marks1;
+  public Long getCoreJava() {
+    return coreJava;
   }
 
-  public void setMarks1(Long marks1) {
-    this.marks1 = marks1;
+  public void setCoreJava(Long coreJava) {
+    this.coreJava = coreJava;
   }
 
-  public Long getMarks2() {
-    return marks2;
+  public Long getSpring() {
+    return spring;
   }
 
-  public void setMarks2(Long marks2) {
-    this.marks2 = marks2;
+  public void setSpring(Long spring) {
+    this.spring = spring;
   }
 
-  public Long getMarks3() {
-    return marks3;
+  public Long getCloudTechnology() {
+    return cloudTechnology;
   }
 
-  public void setMarks3(Long marks3) {
-    this.marks3 = marks3;
+  public void setCloudTechnology(Long cloudTechnology) {
+    this.cloudTechnology = cloudTechnology;
   }
 
   public Long getTotalMark() {
@@ -211,9 +211,9 @@ public class StudentEntity {
         ", dob=" + dob +
         ", section='" + section + '\'' +
         ", gender='" + gender + '\'' +
-        ", marks1=" + marks1 +
-        ", marks2=" + marks2 +
-        ", marks3=" + marks3 +
+        ", marks1=" + coreJava +
+        ", marks2=" + spring +
+        ", marks3=" + cloudTechnology +
         ", totalMark=" + totalMark +
         ", average=" + average +
         ", result='" + result + '\'' +

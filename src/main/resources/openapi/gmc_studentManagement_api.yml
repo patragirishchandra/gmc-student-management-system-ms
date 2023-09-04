@@ -57,6 +57,40 @@ paths:
         503:
           $ref: '#/components/responses/503-Service-unavailable'
 
+    get:
+      tags:
+        - Student Management- APIs
+      summary: Update an existing student
+      description: Update an existing student
+
+      security: []
+      operationId: getStudentsResult
+      parameters:
+        - name: xt-trace-id
+          in: header
+          description: "Represents request traceId, which is an UUID. Must follow the pattern: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'"
+          required: true
+          schema:
+            type: string
+            pattern: '^([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12})$'
+
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentsDetails'
+
+        400:
+          $ref: '#/components/responses/400-bad-request'
+          description: Invalid ID supplied
+        500:
+          $ref: '#/components/responses/500-internal-server-error'
+
+        503:
+          $ref: '#/components/responses/503-Service-unavailable'
+
   /studentmanagemet/student/{student-id}:
     patch:
       tags:
@@ -97,6 +131,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/StudentRegistrationData'
+
+        400:
+          $ref: '#/components/responses/400-bad-request'
+          description: Invalid ID supplied
+        500:
+          $ref: '#/components/responses/500-internal-server-error'
+
+        503:
+          $ref: '#/components/responses/503-Service-unavailable'
+
+    get:
+      tags:
+        - Student Management- APIs
+      summary: Update an existing student
+      description: Update an existing student
+
+      security: []
+      operationId: getStudentResult
+      parameters:
+        - name: xt-trace-id
+          in: header
+          description: "Represents request traceId, which is an UUID. Must follow the pattern: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'"
+          required: true
+          schema:
+            type: string
+            pattern: '^([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12})$'
+        - name: student-id
+          in: path
+          description: student-id
+          required: true
+          schema:
+            type: string
+            pattern: '^([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12})$'
+            example: '95d59e03-ccdf-4aaa-89ad-eab30f7cd84d'
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudentDetails'
 
         400:
           $ref: '#/components/responses/400-bad-request'
@@ -149,17 +224,17 @@ components:
     ResultReviseInput:
       type: object
       properties:
-        marks1:
+        coreJava:
           type: integer
           minimum: 0
           maximum: 100
           example: 35
-        marks2:
+        spring:
           type: integer
           minimum: 0
           maximum: 100
           example: 35
-        marks3:
+        cloudTechnology:
           type: integer
           minimum: 0
           maximum: 100
@@ -194,20 +269,78 @@ components:
         gender:
           type: string
           enum: [M, F, O]
-        marks1:
+        coreJava:
           type: integer
           minimum: 0
           maximum: 100
           example: 35
-        marks2:
+        spring:
           type: integer
           minimum: 0
           maximum: 100
-        marks3:
+        cloudTechnology:
           type: integer
           minimum: 0
           maximum: 100
 
+    StudentsDetails:
+      type: object
+      properties:
+        totalRecords:
+          type: integer
+          example: 100
+        currentPage:
+          type: integer
+          example: 1
+        totalPages:
+          type: integer
+          example: 1000
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/StudentDetails"
+
+    StudentDetails:
+      type: object
+      properties:
+        studentId:
+          type: string
+          example: "fad7c05d-656d-4328-bc69-c3eb3ac66930"
+        name:
+          type: string
+          example: "Girish Patra"
+        dob:
+          type: string
+          description: "yyyy-MM-dd"
+          example: "2023-08-18"
+        section:
+          type: string
+          enum: [A, B, C]
+        gender:
+          type: string
+          enum: [M, F, O]
+        coreJava:
+          type: integer
+          minimum: 0
+          maximum: 100
+          example: 35
+        spring:
+          type: integer
+          minimum: 0
+          maximum: 100
+        cloudTechnology:
+          type: integer
+          minimum: 0
+          maximum: 100
+        totalMark:
+          type: integer
+          example: 200
+        average:
+          type: number
+          example: 30
+        result:
+          type: string
+          example: "Pass"
 
     StudentRegistrationOut:
       type: array

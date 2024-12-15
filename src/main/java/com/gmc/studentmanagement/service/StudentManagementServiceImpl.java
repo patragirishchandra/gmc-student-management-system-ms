@@ -8,10 +8,12 @@ import static com.gmc.studentmanagement.mapper.StudentMapper.mapStudentEntities;
 import static com.gmc.studentmanagement.mapper.StudentMapper.mapStudentRegistrationData;
 import static com.gmc.studentmanagement.mapper.StudentMapper.mapUpdatedResult;
 
+import com.gmc.studentmanagement.entity.StudentDTO;
 import com.gmc.studentmanagement.entity.StudentEntity;
 import com.gmc.studentmanagement.exception.RecordNotFoundException;
 import com.gmc.studentmanagement.repository.StudentRepository;
 import com.gmc.studentmanagemet.resource.ResultReviseInput;
+import com.gmc.studentmanagemet.resource.StudentDetails;
 import com.gmc.studentmanagemet.resource.StudentRegistrationData;
 import com.gmc.studentmanagemet.resource.StudentRegistrationInput;
 import java.util.List;
@@ -83,4 +85,10 @@ public class StudentManagementServiceImpl implements StudentManagementService {
     return getStudentRegistrationData(studentEntity);
   }
 
+  @Override
+  public StudentDetails getStudentResult(String xtTraceId, String studentId) {
+    StudentDTO studentDTO = studentRepository.findStudentDtoByStudentId(studentId);
+    System.out.println(studentDTO);
+    return null;
+  }
 }

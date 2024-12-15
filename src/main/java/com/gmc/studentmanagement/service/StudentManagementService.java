@@ -2,6 +2,7 @@ package com.gmc.studentmanagement.service;
 
 
 import com.gmc.studentmanagemet.resource.ResultReviseInput;
+import com.gmc.studentmanagemet.resource.StudentDetails;
 import com.gmc.studentmanagemet.resource.StudentRegistrationData;
 import com.gmc.studentmanagemet.resource.StudentRegistrationInput;
 
@@ -33,4 +34,6 @@ public interface StudentManagementService {
      * @return The updated student's registration data.
      */
     StudentRegistrationData reviseResult(String xtTraceId, String studentId, ResultReviseInput resultReviseInput);
+
+  StudentDetails getStudentResult(String xtTraceId, String studentId);
 }
